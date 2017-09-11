@@ -1,11 +1,13 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
 public class Editor extends JFrame implements ActionListener
 {
     JMenuBar mb;
     JMenu File,Edit,Help,Format;
-    JMenuItem Cut,Copy,Paste,SelectAll,CharactersTyped,BgColor;
+    JMenuItem Cut,Copy,Paste,SelectAll,CharactersTyped,BgColor,CHelp;
     JTextArea t1;
 
 
@@ -18,12 +20,14 @@ public class Editor extends JFrame implements ActionListener
         Copy=new JMenuItem("Copy");
         Paste=new JMenuItem("Paste");
         SelectAll=new JMenuItem("Select All");
+            CHelp=new JMenuItem("Call for Help");
         CharactersTyped.addActionListener(this);
         Cut.addActionListener(this);
         Copy.addActionListener(this);
         Paste.addActionListener(this);
         SelectAll.addActionListener(this);
         BgColor.addActionListener(this);
+        CHelp.addActionListener(this);
         mb=new JMenuBar();
         File=new JMenu("File");
         Edit=new JMenu("Edit");
@@ -39,6 +43,7 @@ public class Editor extends JFrame implements ActionListener
         Edit.add(SelectAll);
         Edit.addSeparator();
         Format.add(BgColor);
+        Help.add(CHelp);
         mb.add(File);
         mb.add(Edit);
         mb.add(Format);
@@ -76,7 +81,19 @@ public class Editor extends JFrame implements ActionListener
             Color c=JColorChooser.showDialog(this,"Choose",Color.CYAN);
             t1.setBackground(c);
         }
-    }
+        if(e.getSource()== CHelp)
+        {
+            try {
+
+                URI uri=new URI("https://www.google.co.in/?gfe_rd=cr&dcr=0&ei=yQO3WeKUNK6A8QfOhYH4CA");
+                java.awt.Desktop.getDesktop().browse(uri);
+
+            }
+            catch (Exception et)
+            { }
+        }
+
+           }
     public static void main(String args[])
     {
         Editor F=new Editor();
